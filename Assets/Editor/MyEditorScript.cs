@@ -1,28 +1,20 @@
-﻿using UnityEngine;
+﻿using System;
 using System.Collections;
-using UnityEditor;
-using System;
 using System.Collections.Generic;
+using UnityEngine;
+using UnityEditor;
 
-public class BuildScript{
-	
+class MyEditorScript {
 	static string[] SCENES = FindEnabledEditorScenes();
 	
-	static string APP_NAME = "<yourAPPName>";
-	static string TARGET_DIR = "<YourTargetDir>";
+	static string APP_NAME = "YourProject";
+	static string TARGET_DIR = "/Users/ben/Dropbox/Jenkins/ " + GetProjectName() + "/" + Application.platform;
 	
 	[MenuItem ("Custom/CI/Build Mac OS X")]
 	static void PerformMacOSXBuild ()
 	{
 		string target_dir = APP_NAME + ".app";
 		GenericBuild(SCENES, TARGET_DIR + "/" + target_dir, BuildTarget.StandaloneOSXIntel,BuildOptions.None);
-	}
-	
-	[MenuItem ("Custom/CI/Build Web")]
-	static void PerformWebBuild ()
-	{
-		string target_dir = APP_NAME + ".unity3d";
-		GenericBuild(SCENES, TARGET_DIR + "/web/" + target_dir, BuildTarget.WebPlayer,BuildOptions.None);
 	}
 	
 	private static string[] FindEnabledEditorScenes() {
@@ -43,4 +35,11 @@ public class BuildScript{
 		}
 	}
 	
+	public static string GetProjectName()
+	{
+		string[] s = Application.dataPath.Split('/');
+		string projectName = s[s.Length - 2];
+		Debug.Log("project = " + projectName);
+		return projectName;
+	}
 }
