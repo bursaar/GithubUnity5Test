@@ -8,7 +8,7 @@ class MyEditorScript {
 	static string[] SCENES = FindEnabledEditorScenes();
 	
 	static string APP_NAME = "Unity5Test";
-	static string TARGET_DIR = "/Users/ben/Dropbox/Jenkins/ " + GetProjectName();
+	static string TARGET_DIR = "/Users/ben/Dropbox/Jenkins/" + APP_NAME + "/"+ GetProjectName();
 	
 	[MenuItem ("Custom/CI/Build Mac OS X")]
 	static void PerformMacOSXBuild ()
