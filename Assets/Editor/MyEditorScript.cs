@@ -7,16 +7,44 @@ using UnityEditor;
 class MyEditorScript {
 	static string[] SCENES = FindEnabledEditorScenes();
 	
-	static string APP_NAME = "YourProject";
-	static string TARGET_DIR = "/Users/ben/Dropbox/Jenkins/ " + GetProjectName() + "/" + Application.platform;
+	static string APP_NAME = "Unity5Test";
+	static string TARGET_DIR = "/Users/ben/Dropbox/Jenkins/ " + GetProjectName();
 	
 	[MenuItem ("Custom/CI/Build Mac OS X")]
 	static void PerformMacOSXBuild ()
 	{
 		string target_dir = APP_NAME + ".app";
-		GenericBuild(SCENES, TARGET_DIR + "/" + target_dir, BuildTarget.StandaloneOSXIntel,BuildOptions.None);
+		GenericBuild(SCENES, TARGET_DIR + "/" + target_dir, BuildTarget.StandaloneOSXIntel64,BuildOptions.None);
 	}
-	
+
+	[MenuItem ("Custom/CI/Build Web Player")]
+	static void PerformWebPlayerBuild ()
+	{
+		string target_dir = APP_NAME + ".unity3d";
+		GenericBuild(SCENES, TARGET_DIR + "/" + target_dir, BuildTarget.WebPlayerStreamed,BuildOptions.None);
+	}
+
+	[MenuItem ("Custom/CI/Build Win64")]
+	static void PerformWindows64Build ()
+	{
+		string target_dir = APP_NAME + ".exe";
+		GenericBuild(SCENES, TARGET_DIR + "/" + target_dir, BuildTarget.StandaloneWindows64,BuildOptions.None);
+	}
+
+	[MenuItem ("Custom/CI/Build Win32")]
+	static void PerformWindows32Build ()
+	{
+		string target_dir = APP_NAME + ".exe";
+		GenericBuild(SCENES, TARGET_DIR + "/" + target_dir, BuildTarget.StandaloneWindows,BuildOptions.None);
+	}
+
+	[MenuItem ("Custom/CI/Build Android")]
+	static void PerformAndroidBuild ()
+	{
+		string target_dir = APP_NAME + ".apk";
+		GenericBuild(SCENES, TARGET_DIR + "/" + target_dir, BuildTarget.Android,BuildOptions.None);
+	}
+
 	private static string[] FindEnabledEditorScenes() {
 		List<string> EditorScenes = new List<string>();
 		foreach(EditorBuildSettingsScene scene in EditorBuildSettings.scenes) {
