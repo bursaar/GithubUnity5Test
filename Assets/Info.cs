@@ -14,4 +14,9 @@ public class Info : MonoBehaviour {
 
 		infoText.text = infoString;
 	}
+
+	void Update()
+	{
+		if (Input.GetKeyDown(KeyCode.Escape)) Application.Quit();
+	}
 }
